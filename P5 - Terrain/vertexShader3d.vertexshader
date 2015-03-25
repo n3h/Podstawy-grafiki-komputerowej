@@ -1,0 +1,16 @@
+#version 330 core
+
+layout(location = 0) in vec3 vertexPosition;
+uniform mat4 MVP;
+uniform vec2 coordinates;
+
+out vec3 height;
+
+void main() {
+	float R = 6378.0f + (vertexPosition.z / 100);
+	float alfa = radians(coordinates.x + vertexPosition.x/1200);
+	float beta = radians(coordinates.y + 1 + (-1)*vertexPosition.y/1200);
+	gl_Position = MVP * vec4(R * cos(beta) * cos(alfa), R * cos(beta) * sin(alfa), R * sin(beta), 1.0f);
+
+	height = vertexPosition;
+}

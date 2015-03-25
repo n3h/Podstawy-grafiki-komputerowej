@@ -1,0 +1,18 @@
+#version 330 core
+
+layout(location = 0) in vec3 vertexPosition;
+uniform mat4 MVP;
+uniform vec2 coordinates;
+
+out vec3 height;
+
+void main() {
+	gl_Position = MVP * vec4(
+		coordinates.x + (vertexPosition.x / 1200),
+		coordinates.y + 1 + ((-1)*vertexPosition.y/1200),
+		0.0,
+		1.0
+	);
+  
+	height = vertexPosition;
+}

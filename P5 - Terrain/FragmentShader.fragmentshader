@@ -1,0 +1,16 @@
+#version 330 core
+
+// Interpolated values from the vertex shaders
+in vec3 height;
+
+// Ouput data
+out vec3 color;
+
+void main() {
+	float ht = height.z;
+	if (ht < 0.0  ) color = vec3(0.0, 0.0, 1.0); //blue
+	else if (ht < 500.0) color = vec3(0.0, ht/500.0, 0.0); //->green
+	else if (ht < 1000.0) color = vec3(ht/500.0-1.0, 1.0, 0.0); //->yellow
+	else if (ht < 2000.0) color = vec3(1.0, 2.0-ht/1000.0, 0.0); //->red
+	else color = vec3(1.0, 1.0, 1.0); //white
+}
